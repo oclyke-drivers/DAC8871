@@ -34,7 +34,8 @@ typedef enum {
 
 typedef struct _dac8871_if_t {
   dac8871_status_e (*write_16b) ( uint16_t dat, void* arg );  // required. send 16 bits to the DAC8871 using CS, CLK, and MOSI lines. Send MSB first
-  dac8871_status_e (*set_ldac)  ( bool lvl, void* arg );      // optional. control the level of the LDAC line. if not implemented LDAC should be tied LOW
+  dac8871_status_e (*set_ldac)  ( bool lvl, void* arg );      // optional. control the level of the LDAC line. if not implemented LDAC should be pulled LOW
+  dac8871_status_e (*set_rst)   ( bool lvl, void* arg );      // optional. control the level of the RESET line. if not implemented RESET should be pulled HIGH
 } dac8871_if_t;
 
 typedef struct _dac8871_dev_t {

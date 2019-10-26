@@ -33,6 +33,7 @@ typedef struct _dac8871_if_esp32_arg_t {
   int                     mosi_pin;
   int                     cs_pin;
   int                     ldac_pin;
+  int                     rst_pin;
 } dac8871_if_esp32_arg_t;
 
 extern dac8871_if_t dac8871_if_esp32;

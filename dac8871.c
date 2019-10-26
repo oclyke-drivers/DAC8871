@@ -24,7 +24,8 @@ dac8871_status_e dac8871_init_dev(dac8871_dev_t* pdev, dac8871_if_t* pif, void* 
   if(pif == NULL)           { return DAC8871_STAT_ERR_INVALID_ARG; }
   pdev->_if = pif;
   pdev->_arg = arg;
-  if(pdev->_if->set_ldac != NULL){ pdev->_if->set_ldac(false, pdev->_arg); } // set LDAC low so that code writes are automatically latched in
+  if(pdev->_if->set_ldac != NULL) { pdev->_if->set_ldac(false, pdev->_arg); } // set LDAC low so that code writes are automatically latched in
+  if(pdev->_if->set_rst != NULL)  { pdev->_if->set_rst(true, pdev->_arg); }   // set RESET high to keep the device active
   return DAC8871_STAT_OK;
 }
 
