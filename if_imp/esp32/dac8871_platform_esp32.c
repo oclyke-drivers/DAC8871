@@ -33,6 +33,7 @@ dac8871_if_t dac8871_if_esp32 {
 dac8871_status_e write_16b_esp32( uint16_t dat, void* arg ){
   dac8871_status_e retval = DAC8871_STAT_OK;
   esp_err_t ret = ESP_OK;
+  dac8871_if_esp32_arg_t* if_args = (dac8871_if_esp32_arg_t*)arg;
   static bool initialized = false;
     spi_transaction_t trans = {     // Configure common transaction settings (also ensures that the transfer is zero-initialized in other entries)
     .length = 2*8, 
@@ -51,7 +52,7 @@ dac8871_status_e write_16b_esp32( uint16_t dat, void* arg ){
     initialized = true;
   }
   ret |= spi_device_queue_trans(if_args->spi, &trans, portMAX_DELAY);
-  return (ret == ESP_OK) ? DAX0004_STAT_OK : DAX0004_STAT_ERR;
+  return (ret == ESP_OK) ? DAC8871_STAT_OK : DAC8871_STAT_ERR;
 }
 
 dac8871_status_e set_ldac_esp32( bool lvl, void* arg ){
