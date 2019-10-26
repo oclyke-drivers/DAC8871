@@ -24,14 +24,13 @@ dac8871_status_e write_16b_esp32( uint16_t dat, void* arg );
 dac8871_status_e set_ldac_esp32( bool lvl, void* arg );
 dac8871_status_e set_rst_esp32( bool lvl, void* arg );
 
-dac8871_if_t dac8871_if_esp32 {
+dac8871_if_t dac8871_if_esp32 = {
   .write_16b  = write_16b_esp32,
   .set_ldac   = set_ldac_esp32,
   .set_rst    = set_rst_esp32,
 };
 
 dac8871_status_e write_16b_esp32( uint16_t dat, void* arg ){
-  dac8871_status_e retval = DAC8871_STAT_OK;
   esp_err_t ret = ESP_OK;
   dac8871_if_esp32_arg_t* if_args = (dac8871_if_esp32_arg_t*)arg;
   static bool initialized = false;
