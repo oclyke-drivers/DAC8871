@@ -20,17 +20,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SO
 #include "dac8871_platform_esp32.h"
 
 
-dac8871_status_e write_16b_esp32( uint16_t dat, void* arg );
-dac8871_status_e set_ldac_esp32( bool lvl, void* arg );
-dac8871_status_e set_rst_esp32( bool lvl, void* arg );
+dac8871_status_e dac8871_esp32_write_16b( uint16_t dat, void* arg );
+dac8871_status_e dac8871_esp32_set_ldac( bool lvl, void* arg );
+dac8871_status_e dac8871_esp32_set_rst( bool lvl, void* arg );
 
 dac8871_if_t dac8871_if_esp32 = {
-  .write_16b  = write_16b_esp32,
-  .set_ldac   = set_ldac_esp32,
-  .set_rst    = set_rst_esp32,
+  .write_16b  = dac8871_esp32_write_16b,
+  .set_ldac   = dac8871_esp32_set_ldac,
+  .set_rst    = dac8871_esp32_set_rst,
 };
 
-dac8871_status_e write_16b_esp32( uint16_t dat, void* arg ){
+dac8871_status_e dac8871_esp32_write_16b( uint16_t dat, void* arg ){
   esp_err_t ret = ESP_OK;
   dac8871_if_esp32_arg_t* if_args = (dac8871_if_esp32_arg_t*)arg;
   static bool initialized = false;
@@ -54,7 +54,7 @@ dac8871_status_e write_16b_esp32( uint16_t dat, void* arg ){
   return (ret == ESP_OK) ? DAC8871_STAT_OK : DAC8871_STAT_ERR;
 }
 
-dac8871_status_e set_ldac_esp32( bool lvl, void* arg ){
+dac8871_status_e dac8871_esp32_set_ldac( bool lvl, void* arg ){
   dac8871_status_e retval = DAC8871_STAT_OK;
   dac8871_if_esp32_arg_t* if_args = (dac8871_if_esp32_arg_t*)arg;
   static bool initialized = false;
@@ -67,7 +67,7 @@ dac8871_status_e set_ldac_esp32( bool lvl, void* arg ){
   return retval;
 }
 
-dac8871_status_e set_rst_esp32( bool lvl, void* arg ){
+dac8871_status_e dac8871_esp32_set_rst( bool lvl, void* arg ){
   dac8871_status_e retval = DAC8871_STAT_OK;
   dac8871_if_esp32_arg_t* if_args = (dac8871_if_esp32_arg_t*)arg;
   static bool initialized = false;
